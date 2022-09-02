@@ -1,8 +1,9 @@
 // Constants
 const int fThermistorPin = 34;                          // The pin the thermistor is connected to ESP32
-const float fR1 = 100000 ;                              // Value of resistor (ohms) used for the voltage divider
+const float fR1 = 98900;                                // Value of resistor (ohms) used for the voltage divider
 const float fThermistorResistanceAt25Celcius = 100000;  // The resistance of the thermistor at 25Celcius
-const int fThermistorBeta = 3950;                       // The beta coefficient or the B value of the thermistor (usually 3000-4000). Check the thermistors's datasheet for the accurate value
+const int fThermistorBeta = 3955;                       // The beta coefficient or the B value of the thermistor (usually 3000-4000). Check the thermistors's datasheet for the accurate value
+const float fFinalResultCalibration = -6.5;             // How much to add or substract from the final temperature result
 
 // Thermistor Input Sampling Properties
 const int fThermistorSamplesPerRound = 10;              // How many samples to geat each round
@@ -31,6 +32,7 @@ void loop() {
 
   // Convert NTC Thermistor Resistance to Temperature
   float temperature = convertNTCThermistorResistanceToTemperature(thermistorResistance);
+  temperature = temperature + fFinalResultCalibration;
   Serial.print(", Temperature:");
   Serial.println(temperature);
 
@@ -45,17 +47,18 @@ void loop() {
  * and return's the average
  */
 float getAverageThermistorAnalogInput(){
-  
   float result = 0.0;
-
   for (i=0; i < fThermistorSamplesPerRound; i++){
     result += analogRead(fThermistorPin);
     delay (fThermistorSamplesDelayInMs);
   }
-  result = result / (float)fThermistorSamplesPerRound;
-  return result;
+  return result / (float)fThermistorSamplesPerRound;
 }
 
+/**
+ * Converts the NTC Thermistor's resistance to 
+ * Celcius Temperature
+ */
 float convertNTCThermistorResistanceToTemperature(float resistance){
   float temperature = 0;
   temperature = resistance / fThermistorResistanceAt25Celcius; 
@@ -64,6 +67,5 @@ float convertNTCThermistorResistanceToTemperature(float resistance){
   temperature += 1.0 / (25 + 273.15);
   temperature = 1.0 / temperature;  
   temperature -= 273.15;  
-
   return temperature;
 }
