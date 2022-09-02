@@ -1,5 +1,6 @@
 // Constants
 const int fThermistorPin = 34;                          // The pin the thermistor is connected to ESP32
+const int fMosfetPin = 4;                               // The pin the MOSFET is connected to ESP32
 const float fR1 = 98900;                                // Value of resistor (ohms) used for the voltage divider
 const float fThermistorResistanceAt25Celcius = 100000;  // The resistance of the thermistor at 25Celcius
 const int fThermistorBeta = 3955;                       // The beta coefficient or the B value of the thermistor (usually 3000-4000). Check the thermistors's datasheet for the accurate value
@@ -13,6 +14,7 @@ const int fThermistorSamplesDelayInMs = 50;             // Delay in milliseconds
 int i;
 
 void setup() {
+  pinMode(fMosfetPin, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -35,6 +37,12 @@ void loop() {
   temperature = temperature + fFinalResultCalibration;
   Serial.print(", Temperature:");
   Serial.println(temperature);
+
+  if(temperature > 30){
+    digitalWrite(fMosfetPin, HIGH);
+  }else{
+    digitalWrite(fMosfetPin, LOW);
+  }
 
 
   // We measure the temperature every 2 seconds
