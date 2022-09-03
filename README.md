@@ -6,6 +6,9 @@ This thermostat is designed to control DC fans or any other DC device that will 
 ### How to build ?
 The code can be found inside the <b>ESP32_Thermostat</b> directory and can be compiled using the Arduino IDE. For more information read the <a href="https://github.com/nsiatras/esp32_thermostat/wiki/How-to-Compile-with-Arduino-IDE">How to Compile with Arduino IDE</a> Wiki Page.
 
+### Board Schematic
+The schematic of the board can be found inside the <a href="https://github.com/nsiatras/esp32_thermostat/tree/main/PCB_Board">PCB_Board directory</a> directory along with the BOM and Gerber files.
+
 
 ### Story - Why I build this...?
 Most budget thermostats on the market are designed to control A/C power appliances and 
