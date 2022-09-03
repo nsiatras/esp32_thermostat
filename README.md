@@ -2,9 +2,19 @@
 
 This thermostat is designed to control DC fans or any other DC device that will be connected to it. It is designed and works properly with a standard 3D Printer <b>100kohm NTC thermistor</b>.
 
-
 ### How to build ?
 The code can be found inside the <b>ESP32_Thermostat</b> directory and can be compiled using the Arduino IDE. For more information read the <a href="https://github.com/nsiatras/esp32_thermostat/wiki/How-to-Compile-with-Arduino-IDE">How to Compile with Arduino IDE</a> Wiki Page.
+
+In order to modify the <b>temperature the thermostat closes the circuit</b> you need to alter the following line on the code
+
+```
+const float fTemperatureToTurnOn = 40;   // This is the temperature, in Celcius, at which the thermostat will close the circuit
+```
+
+Also a good idea is to measure the actual resistance of the <b>R1 resistor</b> you will use and alter the following line of code. The resistor I used when writing this code was <b>98900 ohms</b>.
+```
+const float fR1 = 98900; // Value of resistor (ohms) used for the voltage divider
+```
 
 ### Board Schematic
 The schematic of the board can be found inside the <a href="https://github.com/nsiatras/esp32_thermostat/tree/main/PCB_Board">PCB_Board directory</a> directory along with the BOM and Gerber files.
