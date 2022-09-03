@@ -12,7 +12,7 @@ In order to modify the <b>temperature the thermostat closes the circuit</b> you 
 const float fTemperatureToTurnOn = 40;   // This is the temperature, in Celcius, at which the thermostat will close the circuit
 ```
 
-Also a good idea is to measure the actual resistance of the <b>R1 resistor</b> you will use and alter the following line of code. The resistor I used when writing this code was <b>98900 ohms</b>.
+For more accurate measurements you have to measure the actual resistance of the <b>R1 resistor</b> you will use and alter the following line of code. The resistor I used when writing this code was <b>98900 ohms</b>.
 ```
 const float fR1 = 98900; // Value of resistor (ohms) used for the voltage divider
 ```
