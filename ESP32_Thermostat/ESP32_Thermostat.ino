@@ -34,7 +34,7 @@ const float fThermistorResistanceAt25Celcius = 100000;  // The resistance of the
 const int fThermistorBeta = 3955;                       // The beta coefficient or the B value of the thermistor (usually 3000-4000). Check the thermistors's datasheet for the accurate value
 const float fFinalResultCalibration = -6.5;             // How much to add or substract from the final temperature result
 
-const float fTemperatureToTurnOn = 40;                  // This is the temperature, in Celcius, at which the thermostat will close the circuit
+const float fTemperatureToTurnOn = 30;                  // This is the temperature, in Celcius, at which the thermostat will close the circuit
 
 // Thermistor Input Sampling Properties
 const int fThermistorSamplesPerRound = 10;              // How many samples to geat each round
@@ -45,6 +45,7 @@ int i;
 
 void setup() {
   pinMode(fMosfetPin, OUTPUT);
+  digitalWrite(fMosfetPin, LOW);
   Serial.begin(9600);
 }
 
@@ -71,6 +72,7 @@ void loop() {
   // then turn the Mosfet Pin to High.
   if(temperature >= fTemperatureToTurnOn){
     digitalWrite(fMosfetPin, HIGH);
+     Serial.print("On");
   }else{
     digitalWrite(fMosfetPin, LOW);
   }
