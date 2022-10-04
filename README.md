@@ -8,12 +8,12 @@ The code can be found inside the <b>ESP32_Thermostat</b> directory and can be co
 
 In order to modify the <b>temperature the thermostat closes the circuit</b> you need to alter the following line on the code
 
-```
+```c
 const float fTemperatureToTurnOn = 40;   // This is the temperature, in Celcius, at which the thermostat will close the circuit
 ```
 
 For more accurate measurements you have to measure the actual resistance of the <b>R1 resistor</b> you will use and alter the following line of code. The resistor I used when writing this code was <b>98900 ohms</b>.
-```
+```c
 const float fR1 = 98900; // Value of resistor (ohms) used for the voltage divider
 ```
 Board Schematic
